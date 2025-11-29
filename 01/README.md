@@ -17,6 +17,8 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
       - เรียกดูไฟล์
       -l
         -สิทธิของ Folder
+      -a
+        -ไฟล์ที่ซ่อน
     mkdir
       - สร้างโฟลเดอร์
     cat
