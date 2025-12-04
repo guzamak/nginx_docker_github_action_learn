@@ -94,10 +94,50 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
     - defualt
     - somesite (not defualt)
       ex somesite
-        
-        
+  https://nginxconfig.io/ เว็บไซต์ Generate Nginx Config พร้อม https (add headers)
+  ## sites-enable
+    - somesite
+  ## Load Balance รันระบบด้วยหลาย cpu เเต่ network เดียวกัน
+    upstream backend_servers {
+    server 192.168.1.10; (ip1)
+    server 192.168.1.11:3000; (ip2)
+    server 192.168.1.12:3000/api; (ip3)
+    }
+    server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://backend_servers; <------ กระจายไปเเต่ละ computer สลับไปมา
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+      }
+    }
+  ## Caching การเก็บข้อมูลที่โหลดไว้ใช้ซ้ำ
+    location /public/ {
+        root /var/www/example.com/public/;
+        expires 30d;
+        add_header Cache-Control "public, max-age=2592000";
+    }
+
+    location /api/live-data {
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+        add_header Pragma "no-cache";
+        add_header Expires 0;
+        try_files $uri $uri/ /index.html;
+    }
+  ## Basic auth for serect web 
+
+  ## Rate Limiting
+
+  ## SSL ทำให้เว็บเป็น https://
+    certbot ลิงไม่ใช้ ใช้ cloudflare ssl ก็ได้ถ้าเอา cloudflare คุม Domain เลือกใช้สักอย่าง
+
+### home server ทำให้เน็ตเราเป็น public ip เน็ตกูระเบิดไปละ vps เลย
+
 ### ssh บางโปรเเกรม ใช้ key ในการยืนยันตัวตน เเทน password
   -cd .ssh/authiruzed_keys
   Putty = openssh ui version
   systemctl ssh
 ### DOCKER
+  
