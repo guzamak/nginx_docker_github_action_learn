@@ -101,7 +101,7 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
     upstream backend_servers {
     server 192.168.1.10; (ip1)
     server 192.168.1.11:3000; (ip2)
-    server 192.168.1.12:3000/api; (ip3)
+    server 192.168.1.12:3000/api; (ip3) ผิด
     }
     server {
     listen 80;
@@ -144,6 +144,10 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
 
 
 ### CI/CD automation server
+  use pm2
+  - https://dev.to/goodidea/setting-up-pm2-ci-deployments-with-github-actions-1494
+  use docker
+  - https://srangseethammakul.medium.com/%E0%B8%97%E0%B8%B3-ci-cd-%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2-github-actions-docker-digital-ocean-75c9a3cd0a49
   มีหลายอัน github action ง่ายสุด (ลิงงง ชห.)
   location 
   - .github
