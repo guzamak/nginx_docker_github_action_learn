@@ -139,5 +139,9 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
   -cd .ssh/authiruzed_keys
   Putty = openssh ui version
   systemctl ssh
-### DOCKER
-  
+### DOCKER ไม่ต้องกำหนดค่าเองใน nginx
+  docker desktop (ui version )
+
+
+### CI/CD automation server
+มีหลายอัน github action ง่ายสุด
