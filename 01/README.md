@@ -144,4 +144,10 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
 
 
 ### CI/CD automation server
-มีหลายอัน github action ง่ายสุด
+  มีหลายอัน github action ง่ายสุด (ลิงงง ชห.)
+  location 
+  - .github
+    - workflows
+      build.yml
+    -scriots
+      shell (.sh) จ้า
