@@ -96,7 +96,7 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
       ex somesite
   https://nginxconfig.io/ เว็บไซต์ Generate Nginx Config พร้อม https (add headers)
   ## sites-enable
-    - somesite
+    - somesite ( symlink )
   ## Load Balance รันระบบด้วยหลาย cpu เเต่ network เดียวกัน
     upstream backend_servers {
     server 192.168.1.10; (ip1)
@@ -105,7 +105,7 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
     }
     server {
     listen 80;
-    server_name example.com;
+    server_name example.com; <------ domain name
 
     location / {
         proxy_pass http://backend_servers; <------ กระจายไปเเต่ละ computer สลับไปมา
@@ -132,26 +132,55 @@ https://www.youtube.com/watch?v=PQBRiPkA63w
 
   ## SSL ทำให้เว็บเป็น https://
     certbot ลิงไม่ใช้ ใช้ cloudflare ssl ก็ได้ถ้าเอา cloudflare คุม Domain เลือกใช้สักอย่าง
-
+    - https://www.youtube.com/watch?v=X1KeP29g9ps
 ### home server ทำให้เน็ตเราเป็น public ip เน็ตกูระเบิดไปละ vps เลย
 
 ### ssh บางโปรเเกรม ใช้ key ในการยืนยันตัวตน เเทน password
   -cd .ssh/authiruzed_keys
+
   Putty = openssh ui version
+
   systemctl ssh
-### DOCKER ไม่ต้องกำหนดค่าเองใน nginx
-  docker desktop (ui version )
+### DOCKER ไม่ต้องกำหนดค่า var เองใน nginx
+  - docker desktop ( ui version )
+  เเก้ปัญหาการตั่งค่าไม่เหมือนกันในเเต่ละ computer
+  - Docker Image คือสิ่งรวบรวม os code dep
+  - Docker Container คือ ตัวใช้รัน Image
+  File
+    - Dockerfile ไฟล์รวบรวมคำสั่งสร้าง Image
+    - docker run -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres (ใช้ ymal ดีกว่า)
+      docker run --help
+        -e กำหนด .env
+        -d ปิดเทอร์มินัลได้โดยที่คอนเทนเนอร์ยังทำงานต่อไป (detached mode)
+        -p เลือก port
+      -p 5432:5432 
+          -local port ส่งไปข้างนอก -image port ที่ image run
+    - docker-compose.yml รวบรวมคำสั่งที่จะรันบน Docker CLI มารันเป็นชุด
 
+    ## commands
+      - docker images แสดงรายการ Image ที่เราสามารถใช้งานได้
+      - docker pull <image>[:tag] ดาวน์โหลด Image จาก Docker Hub เช่น sql radis :tag=version
+      - docker run [ag]
+    ## Volume ( สำคัญ ตัวเก็บข้อมูล )
+      - docker volume ls
+      - docker 
+    ## การสร้าง Image
+      - build ตาม Dockerfile
+    ## docker compose
+  
+    ## network
 
-### CI/CD automation server
-  use pm2
+### CI/CD automation server ( ยากสุดจากทุกอัน )
+  use with pm2
   - https://dev.to/goodidea/setting-up-pm2-ci-deployments-with-github-actions-1494
-  use docker
+  
+  use with docker
   - https://srangseethammakul.medium.com/%E0%B8%97%E0%B8%B3-ci-cd-%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2-github-actions-docker-digital-ocean-75c9a3cd0a49
   มีหลายอัน github action ง่ายสุด (ลิงงง ชห.)
+
   location 
   - .github
     - workflows
       build.yml
-    -scriots
+    -scripts
       shell (.sh) จ้า
